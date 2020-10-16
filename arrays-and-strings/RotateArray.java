@@ -1,4 +1,3 @@
-// https://leetcode.com/problems/rotate-array/
 class Solution {
     // This solution involves creative array rotation.
     // Given an array [0, 1, 2, 3, 4] and k=3, we expect to get [2, 3, 4, 0, 1]

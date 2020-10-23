@@ -22,27 +22,32 @@ class Solution {
         // Keep track of depth as we go
         // Once we find a node with no children, return the current depth.
         Queue<TreeNodeWrapper> queue = new LinkedList<>();
+        // Depth apparently starts at 1 according to leetcode's tests.
         queue.add(new TreeNodeWrapper(root, 1));
         
         while(!queue.isEmpty()) {
             TreeNodeWrapper current = queue.poll();
+            
+            // If this is a leaf, we're done searching
             if (current.node.left == null && current.node.right == null) {
                 return current.depth;
             }
             
+            // Get child nodes into the queue.
             int nextDepth = current.depth + 1;
-            
-            if (current.node.right != null) {
-                queue.add(new TreeNodeWrapper(current.node.right, nextDepth));
-            }
-            
-            if (current.node.left != null) {
-                queue.add(new TreeNodeWrapper(current.node.left, nextDepth));
-            }
+            addToQueueIfNotNull(current.node.right, nextDepth, queue);
+            addToQueueIfNotNull(current.node.left, nextDepth, queue);
         }
         
         // Should never happen.
         return -1;
+    }
+    
+    // Helper function to avoid putting nulls into the queue.
+    private void addToQueueIfNotNull(TreeNode node, int depth, Queue queue) {
+        if (node != null) {
+            queue.add(new TreeNodeWrapper(node, depth));
+        }
     }
     
     // Use a wrapper class to keep track of depth alongside a node as we go.

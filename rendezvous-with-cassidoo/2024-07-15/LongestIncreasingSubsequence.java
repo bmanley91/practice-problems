@@ -41,7 +41,7 @@ public class LongestIncreasingSubsequence {
         while (curr < input.length) {
             // If the current number is less than the one before it,
             // Then start a new subsequence
-            if (input[curr] < input[curr-1]) {
+            if (input[curr] <= input[curr-1]) {
                 start = curr;
             }
             curr++;
